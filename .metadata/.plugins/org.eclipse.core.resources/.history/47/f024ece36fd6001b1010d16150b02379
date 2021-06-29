@@ -1,0 +1,9 @@
+package com.bms.validation;
+
+import javax.validation.ConstraintValidator;
+
+import com.bms.validators.AccountType;
+
+public class LoanTypeValidator implements ConstraintValidator<LoanType, String>{{
+
+}

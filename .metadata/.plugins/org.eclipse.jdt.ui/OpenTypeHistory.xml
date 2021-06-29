@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+    <typeInfo handle="=BMSApplyLoan/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.bms.service{EducationService.java[EducationService" modifiers="513" timestamp="1624341589273"/>
+    <typeInfo handle="=BMSApplyLoan/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.bms.service{LoanService.java[LoanService" modifiers="513" timestamp="1624341555802"/>
+    <typeInfo handle="=BMSApplyLoan/C:\/Users\/kumar\/.m2\/repository\/org\/springframework\/data\/spring-data-jpa\/2.3.9.RELEASE\/spring-data-jpa-2.3.9.RELEASE.jar=/maven.pomderived=/true=/=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.data=/=/maven.artifactId=/spring-data-jpa=/=/maven.version=/2.3.9.RELEASE=/=/maven.scope=/compile=/&lt;org.springframework.data.jpa.repository(JpaRepository.class[JpaRepository" modifiers="1537" timestamp="1623913492954"/>
+</typeInfoHistroy>

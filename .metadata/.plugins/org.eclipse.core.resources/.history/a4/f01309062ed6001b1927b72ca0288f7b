@@ -1,0 +1,17 @@
+package com.bms.model;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+
+@Data
+@AllArgsConstructor
+public class CustomerData {
+	
+	
+	private String username;
+	private String password;
+	private String authToken;
+
+}

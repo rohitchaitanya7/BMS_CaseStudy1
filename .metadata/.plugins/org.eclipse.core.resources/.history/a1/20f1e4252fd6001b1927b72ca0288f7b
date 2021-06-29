@@ -1,0 +1,50 @@
+package com.bms.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.bms.dao.UserDAO;
+import com.bms.model.CustomerData;
+
+
+
+@SpringBootTest
+ class ServiceTest {
+
+	UserDetails userdetails;
+	
+	@InjectMocks
+	CustomerDetailsService custdetailservice;
+
+	@Mock
+	UserDAO userservice;
+
+	@Test
+	 void loadUserByUsernameTest() {
+		
+		Optional<CustomerData> user=new CustomerData("kumar","kumar",null);
+		when(userservice.findById("kumar")).thenReturn(user);
+		UserDetails loadUserByUsername = custdetailservice.loadUserByUsername("kumar");
+		assertEquals(user.getUserid(),loadUserByUsername.getUsername());
+	}
+	@Test
+	 void loadUserByUsernameFalseTest() {
+		
+		CustomerData user=new CustomerData("kumar","kumar",null);
+		Optional<CustomerData> data =Optional.of(user) ;
+		when(userservice.findById("kumar")).thenReturn(data);
+		UserDetails loadUserByUsername = custdetailservice.loadUserByUsername(user.getUserid());
+		assertNotEquals(user.getUserid()+"false",loadUserByUsername.getUsername());
+	}
+
+	
+}

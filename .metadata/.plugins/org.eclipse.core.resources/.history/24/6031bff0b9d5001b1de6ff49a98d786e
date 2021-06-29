@@ -1,0 +1,15 @@
+package com.bms;
+
+import java.nio.charset.StandardCharsets;
+
+public class TestEncode {
+
+	public static void main(String[] args) {
+		String rawString = "kumar";
+		byte[] bytes = rawString.getBytes(StandardCharsets.UTF_8);
+
+		String utf8EncodedString = new String(bytes, StandardCharsets.UTF_8);
+
+	}
+
+}

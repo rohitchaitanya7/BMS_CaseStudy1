@@ -1,0 +1,5 @@
+package com.bms.model;
+
+public enum RateOfInterest {
+
+}

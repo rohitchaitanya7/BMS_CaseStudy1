@@ -1,0 +1,43 @@
+package com.bms.service;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.bms.dao.LoanDao;
+import com.bms.model.Loan;
+import com.bms.restclients.AuthFeign;
+
+@Service
+public class LoanServiceImpl implements LoanService {
+
+	
+	@Autowired
+	private LoanDao ld;
+	@Autowired
+	private AuthFeign af;
+	@Override
+	public ResponseEntity<Object> applyLoan(Loan loan, String cid,String token) {
+		if (af.getValidity(token).getBody().isValid()) {
+			long count=ld.count();
+			loan.setLoan_no("L-"+(10000+count));
+			loan.setApplyDate(new Date());
+			if(loan.getType().equalsIgnoreCase("Education")) {
+				
+			}
+			loan.setRateOfInterest(2);
+			loan.setCid(cid);
+			loan.setStatus("applied");
+			ld.save(loan);
+			return new ResponseEntity<>(loan.getType()+" Loan Status: "+loan.getStatus(),HttpStatus.OK);
+		
+		}
+		else {
+			return new ResponseEntity<>(false,HttpStatus.UNAUTHORIZED);
+		}
+	}
+}

@@ -1,0 +1,44 @@
+package com.bms.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Table
+public class Loan{
+	@Id
+	private String loan_no;
+	@Column
+	@JsonIgnore
+	private String cid;
+	@Column
+	private String Type;
+	@Column
+	private long Amount;
+	@Column
+	@JsonIgnore
+	private Date ApplyDate;
+	@Column
+	@JsonIgnore
+	private Date IssueDate;
+	@Column
+	@JsonIgnore
+	private double rateOfInterest;
+	@Column
+	private int durationInYears;
+	@Column
+	@OneToMany(mappedBy = "loan_no")
+	private LoanDetails loanDetails;
+	
+	
+}

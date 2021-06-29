@@ -1,0 +1,5 @@
+package com.bms.exception;
+
+public class UnAuthorizationException extends Exception {
+
+}

@@ -1,0 +1,12 @@
+package com.bms.service;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.bms.model.Customer;
+import com.bms.model.ResponseForSuccess;
+@Service
+public interface RegisterService {
+	public ResponseEntity<ResponseForSuccess> register(Customer customer);
+	public ResponseEntity<ResponseForSuccess> editDetails(String token,Customer customer,String cid);
+}

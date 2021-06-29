@@ -1,0 +1,19 @@
+package com.bms.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+
+@Data
+@AllArgsConstructor
+public class CustomerData {
+	
+	
+	private String username;
+	private String password;
+	@JsonIgnore
+	private String authToken;
+
+}

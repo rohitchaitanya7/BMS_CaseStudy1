@@ -1,0 +1,49 @@
+package com.bms.service;
+
+import java.util.Date;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.bms.dao.LoanDao;
+import com.bms.dao.PersonalOrHomeDao;
+import com.bms.model.Loan;
+import com.bms.model.PersonalOrHome;
+import com.bms.restclients.AuthFeign;
+
+@Service
+public class PersonalOrHomeServiceImpl implements PersonalOrHomeService {
+
+	@Autowired
+	private LoanDao ld;
+	@Autowired
+	private PersonalOrHomeDao pd;
+	@Autowired
+	private AuthFeign af;
+	@Override
+	public ResponseEntity<Object> applyPerOrHomeLoan(PersonalOrHome loan, String cid,String token) {
+		if (af.getValidity(token).getBody().isValid()) {
+			Optional<Loan> loan1=ld.findById(cid);
+			if(loan1.isPresent()) {
+				String rate=null;
+				loan1.get().setRateOfInterest(2);
+				loan1.get().setLoanIssueDate(new Date());
+				ld.save(loan1.get());
+				loan.setCid(cid);
+				pd.save(loan);
+				return new ResponseEntity<>(true,HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<>(false,HttpStatus.NOT_FOUND);
+			}
+		
+		}
+		else {
+			return new ResponseEntity<>(false,HttpStatus.UNAUTHORIZED);
+		}
+	}
+
+}

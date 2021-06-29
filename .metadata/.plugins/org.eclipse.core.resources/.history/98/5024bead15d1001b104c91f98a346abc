@@ -1,0 +1,66 @@
+package com.bms.service;
+
+import java.util.Date;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.bms.dao.CustomerDao;
+import com.bms.model.Customer;
+import com.bms.restclients.AuthFeign;
+
+@Service
+public class RegisterServiceImpl implements RegisterService {
+
+	@Autowired
+	private CustomerDao cd;
+	
+	@Autowired
+	private AuthFeign authFeign;
+	
+	private Customer user=null;
+	@Override
+	public ResponseEntity<Object> register(Customer customer) {
+		try {
+			Optional<Customer> user=cd.findByUsername(customer.getUsername());
+			if(user.isPresent()) {
+				return new ResponseEntity<>(false, HttpStatus.CONFLICT);
+			}
+			else {
+				customer.setCutomer_id("R-003");
+				customer.setCitizenStatus("junior");
+				customer.setRegistrationDate(new Date());
+				cd.save(customer);
+				return new ResponseEntity<>(true, HttpStatus.OK);
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return new ResponseEntity<>(true, HttpStatus.PARTIAL_CONTENT);
+		}
+	}
+	@Override
+	public ResponseEntity<Object> editDetails(String token,Customer customer) {
+		
+		if (authFeign.getValidity(token).getBody().isValid()) {
+			System.out.println(authFeign.getValidity(token).getBody().getUid()+" ---- "+customer.getUsername());
+			if(authFeign.getValidity(token).getBody().getUid().equalsIgnoreCase(customer.getUsername())) {
+				System.out.println("HI");
+				cd.save(customer);
+				System.out.println("HI");
+				return new ResponseEntity<>(true, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<>(true, HttpStatus.CONFLICT);
+			}
+		}
+		else {
+			return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
+		}
+	}
+
+}
+

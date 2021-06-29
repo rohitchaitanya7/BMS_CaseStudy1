@@ -1,0 +1,49 @@
+package com.bms.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+
+@Data
+@Entity
+@Table
+public class LoanDetails {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private String id;
+	
+	@Column
+	private double courseFee;
+	@Column
+	private String course;
+	@Column
+	private String fatherName;
+	@Column
+	private String fatherOccupation;
+	@Column
+	private int fatherTotalExp;
+	@Column
+	private int fatherCurrentCompanyExp;
+	@Column
+	private String rationCard;
+	@Column
+	private double FatherAnnualIncome;
+	@Column
+	private double AnnualIncome;
+	@Column
+	private String companyName;
+	@Column
+	private String designation;
+	@Column
+	private int TotalExp;
+	@Column
+	private int ExpWithCurrentCompany;
+}

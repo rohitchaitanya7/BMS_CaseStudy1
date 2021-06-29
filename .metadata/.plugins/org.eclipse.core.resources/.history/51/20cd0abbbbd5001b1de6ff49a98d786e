@@ -1,0 +1,19 @@
+package com.bms;
+
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
+public class TestEncode {
+
+	public static void main(String[] args) {
+		
+		String BasicBase64format= Base64.getEncoder().encodeToString("kumar".getBytes());
+		System.out.println(BasicBase64format);
+		byte[] actualByte= Base64.getDecoder().decode(BasicBase64format);
+		String actualString= new String(actualByte);
+		System.out.println(actualString);
+
+	}
+
+}

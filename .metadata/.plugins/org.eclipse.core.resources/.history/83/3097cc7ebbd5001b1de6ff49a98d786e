@@ -1,0 +1,17 @@
+package com.bms;
+
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+
+public class TestEncode {
+
+	public static void main(String[] args) {
+		String rawString = "kumar";
+		ByteBuffer buffer = StandardCharsets.UTF_8.encode(rawString); 
+		System.out.println(buffer);
+		String utf8EncodedString = StandardCharsets.UTF_8.decode(buffer).toString();
+		System.out.println(utf8EncodedString);
+
+	}
+
+}

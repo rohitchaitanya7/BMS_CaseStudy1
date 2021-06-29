@@ -1,0 +1,26 @@
+package com.bms.model;
+
+import java.time.LocalDateTime;
+import java.util.Map;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+/**Model class for the business details*/
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class MessageResponse {
+	/**
+	 *Response message
+	 */
+	Map<String,String> error;
+	/**
+	 *Response date 
+	 */
+	LocalDateTime date;
+
+}

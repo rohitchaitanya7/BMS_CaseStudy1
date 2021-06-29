@@ -1,0 +1,93 @@
+package com.bms.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
+
+@Entity
+@Data
+@Table
+public class Customer {
+	
+	@JsonIgnore
+	@Id
+	private String customer_id;
+	
+	@NotBlank(message = "Customer name is mandatory ")
+	@Pattern(regexp = "[a-zA-Z ]*$", message = "Customer name should contain only alphabets and space")
+	@Column
+	private String name;
+	
+	@NotBlank(message = "Username is mandatory ")
+	@Pattern(regexp = "[a-zA-Z0-9]*$", message = "user name should contain only alphabets and digits")
+	@Column
+	private String username;
+	@NotBlank(message = "Password is mandatory")
+	@Size(min = 8, message = "minimum 8 Characters required")
+	@Column
+	private String password;
+	@NotBlank(message = "Guardian Type is mandatory ")
+	@Column
+	private String guardianType;
+	@NotBlank(message = "Guardian Name is mandatory ")
+	@Pattern(regexp = "[a-zA-Z ]*$", message = "Guardian Name should contain only alphabets and space")
+	@Column
+	private String guardianName;
+	@NotBlank(message = "Address is mandatory ")
+	@Column
+	private String address;
+	@NotBlank(message = "CitizenShip is mandatory ")
+	@Column
+	private String citizenship;
+	@NotBlank(message = "State Name is mandatory ")
+	@Column
+	private String state;
+	@NotBlank(message = "Country Name is mandatory ")
+	@Column
+	private String country;
+	@Column
+	private String emailAddress;
+	@Column
+	private String gender;
+	@Column
+	private String maritalStatus;
+	@Column
+	private long coutactNo;
+	@Column
+	private Date dob;
+	@JsonIgnore
+	@Column
+	private Date registrationDate;
+	@JsonIgnore
+	@Column
+	private String citizenStatus;
+	@Column
+	private String identificationProofType;
+	@Column
+	private long identificationNumber;
+	@Column
+	private String ReferenceAccountHolderName;
+	@Column
+	private String ReferenceAccountHolderAccountNo;
+	@Column
+	private String ReferenceAccountHolderAddress;
+	@Column
+	private String accountType;
+	@Column
+	private String bankName;
+	@Column
+	private String branchName;
+	@Column 
+	private long depositAmount;
+
+}

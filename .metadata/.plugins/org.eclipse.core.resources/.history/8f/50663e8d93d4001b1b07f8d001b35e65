@@ -1,0 +1,31 @@
+package com.bms.model;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+public class LoanDetails {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private String cid;
+	@Column
+	private double courseFee;
+	@Column
+	private String course;
+	@Column
+	private String fatherName;
+	@Column
+	private String fatherOccupation;
+	@Column
+	private int fatherTotalExp;
+	@Column
+	private int fatherCurrentCompanyExp;
+	@Column
+	private String rationCard;
+	@Column
+	private double AnnualIncome;
+}

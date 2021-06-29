@@ -1,0 +1,22 @@
+package com.bms.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Table
+public class PersonalOrHome {
+
+	private double AnnualIncome;
+	private String companyName;
+	private String designation;
+	private int TotalExp;
+	private int ExpWithCurrentCompany;
+}

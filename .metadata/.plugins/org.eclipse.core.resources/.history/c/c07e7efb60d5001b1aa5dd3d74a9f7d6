@@ -1,0 +1,6 @@
+package com.bms.exception;
+
+@SuppressWarnings("serial")
+public class UserNotFoundException extends Exception {
+
+}

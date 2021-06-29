@@ -1,0 +1,101 @@
+package com.bms.service;
+
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.bms.dao.CustomerDao;
+import com.bms.exception.InitialDepositException;
+import com.bms.exception.UnAuthorizationException;
+import com.bms.exception.UserNotFoundException;
+import com.bms.model.Customer;
+import com.bms.model.ResponseForSuccess;
+import com.bms.restclients.AuthFeign;
+
+@Service
+public class RegisterServiceImpl implements RegisterService {
+
+	
+	@Autowired
+	private CustomerDao cd;
+	
+	@Autowired
+	private AuthFeign authFeign;
+	
+	public int getAge(Date dob) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+	      formatter.format(dob);
+	      Instant instant = dob.toInstant();
+	      ZonedDateTime zone = instant.atZone(ZoneId.systemDefault());
+	      LocalDate givenDate = zone.toLocalDate();
+	      Period period = Period.between(givenDate, LocalDate.now());
+	      return period.getYears();
+	}
+	@Override
+	public ResponseEntity<ResponseForSuccess> register(Customer customer) throws Exception{
+		try {
+			Optional<Customer> user=cd.findByUsername(customer.getUsername());
+			if(user.isPresent()) {
+				throw new UserNotFoundException();
+			}
+			else {
+				long count=100+cd.count();
+				System.out.println(count);
+				customer.setCustomer_id("R-"+ ++count);
+				Date dob=customer.getDob();
+				int age=getAge(dob);
+				if(age<18) {
+					customer.setCitizenStatus("Minor");
+				}
+				else if(age<=60){
+					customer.setCitizenStatus("Normal");
+				}
+				else {
+					customer.setCitizenStatus("Senior");
+				}
+				if(customer.getAccountType().equalsIgnoreCase("Savings")) {
+					if(customer.getDepositAmount()<5000)
+						throw new InitialDepositException();
+				}
+				customer.setRegistrationDate(new Date());
+				cd.save(customer);
+				return new ResponseEntity<>(new ResponseForSuccess("User Registered Successfully\n Customer ID: "+customer.getCustomer_id()), HttpStatus.OK);
+			}
+		}
+		catch(Exception e) {
+			throw new Exception("Something Went Wrong");
+		}
+	}
+	@Override
+	public ResponseEntity<ResponseForSuccess> editDetails(String token,Customer customer,String cid) throws Exception{
+		
+		if (authFeign.getValidity(token).getBody().isValid()) {
+				System.out.println("Hi");
+				Optional<Customer> cust=cd.findById(cid);
+				if(cust.isPresent()) {
+					System.out.println("Hi1");
+					customer.setCustomer_id(cid);
+					cd.save(customer);
+					return new ResponseEntity<>(new ResponseForSuccess("Customer Details Updated Successfully"), HttpStatus.OK);
+				}
+				else {
+					throw new UserNotFoundException();
+				}
+		}
+		else {
+			throw new UnAuthorizationException();
+		}
+	}
+
+}
+

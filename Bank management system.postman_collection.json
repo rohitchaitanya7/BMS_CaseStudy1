@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "2b25ca75-0696-4598-acdc-6693dc1a68d6",
+		"name": "Bank management system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Loan",
+			"item": [
+				{
+					"name": "localhost8090/loan/{R-101}/applyLoan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrdW1hciIsImV4cCI6MTYyNDk2NTA1MywiaWF0IjoxNjI0OTYxNDUzfQ.B3wEfg00LDYSW6E_uKET-xpbVko49hHcZPdzsQviERA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": 100000,\r\n  \"durationInYears\": 5,\r\n  \"type\": \"Education\",\r\n  \"loanDetails\": {\r\n    \"course\": \"BTech\",\r\n    \"courseFee\": 35000,\r\n    \"fatherAnnualIncome\": 100000,\r\n    \"fatherCurrentCompanyExp\": 5,\r\n    \"fatherName\": \"Ramesh\",\r\n    \"fatherOccupation\": \"Executive\",\r\n    \"fatherTotalExp\": 25,\r\n    \"rationCard\": \"12345678\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8091/loan/{R-101}/applyLoan",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"loan",
+								"{R-101}",
+								"applyLoan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomerLoans",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/loan/R-002/getCustomerLoans",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"loan",
+								"R-002",
+								"getCustomerLoans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EducationLoan/getLoanByType",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8091/loan/EducationLoan/getLoanByType",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"loan",
+								"EducationLoan",
+								"getLoanByType"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Registration",
+			"item": [
+				{
+					"name": "localhost:8090/customer/R-002/getDetails",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/customer/R-002/getDetails",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"customer",
+								"R-002",
+								"getDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8090/customer/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"accountType\": \"Salary\",\r\n  \"address\": \"1-57 , Madhavaram\",\r\n  \"bankName\": \"Indian Bank\",\r\n  \"branchName\": \"main branch chittoor\",\r\n  \"citizenship\": \"Indian\",\r\n  \"country\": \"India\",\r\n  \"contactNo\": \"9493407053\",\r\n  \"depositAmount\": 0,\r\n  \"dob\": \"1999-01-02\",\r\n  \"emailAddress\": \"kumarpr792@gmail.com\",\r\n  \"gender\": \"Male\",\r\n  \"guardianName\": \"Ramesh\",\r\n  \"guardianType\": \"Father\",\r\n  \"identificationNumber\": \"ABCDE2132Q\",\r\n  \"identificationProofType\": \"PAN\",\r\n  \"maritalStatus\": \"Unmarried\",\r\n  \"name\": \"kumarpr\",\r\n  \"referenceAccountHolderAccountNo\": \"123345\",\r\n  \"referenceAccountHolderAddress\": \"Madhavaram\",\r\n  \"referenceAccountHolderName\": \"Ramesh\",\r\n  \"state\": \"Andhra\",\r\n  \"loginDetails\":{\r\n      \"username\":\"rohit\",\r\n      \"password\":\"rohit@792\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/customer/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"customer",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrdW1hciIsImV4cCI6MTYyNTcxODUyMiwiaWF0IjoxNjI1NzE0OTIyfQ.Gc_TM81emWKWfXOU_wJhhy1k81Qcbi3YPz0ak4WvDVE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"accountType\": \"Salary\",\r\n  \"address\": \"1-57 , Madhavaram\",\r\n  \"bankName\": \"Indian Bank\",\r\n  \"branchName\": \"main branch chittoor\",\r\n  \"citizenship\": \"Indian\",\r\n  \"country\": \"India\",\r\n  \"contactNo\": \"9493407053\",\r\n  \"depositAmount\": 800,\r\n  \"dob\": \"1999-07-02\",\r\n  \"emailAddress\": \"rohit792@gmail.com\",\r\n  \"gender\": \"Male\",\r\n  \"guardianName\": \"Ramesh\",\r\n  \"guardianType\": \"Father\",\r\n  \"identificationNumber\": \"ABCDE2132Q\",\r\n  \"identificationProofType\": \"PAN\",\r\n  \"maritalStatus\": \"Unmarried\",\r\n  \"name\": \"kumarpr\",\r\n  \"referenceAccountHolderAccountNo\": \"123345\",\r\n  \"referenceAccountHolderAddress\": \"Madhavaram\",\r\n  \"referenceAccountHolderName\": \"Ramesh\",\r\n  \"state\": \"Andhra\",\r\n  \"loginDetails\":{\r\n      \"username\":\"kumar\",\r\n      \"password\":\"kumar@792\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/customer/R-002/updateDetails",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"customer",
+								"R-002",
+								"updateDetails"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "localhost:8081/login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \r\n  \"password\": \"a3VtYXJANzky\",\r\n  \"username\": \"a3VtYXI=\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "kumar",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "kumar@792",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
